@@ -1,0 +1,14 @@
+<app-cockpit 
+(serverCreated)= "onAddServer($event)"
+(bpCreated)= "onAddBluePrint($event)"></app-cockpit>
+<app-server-element 
+*ngFor ="let serverElement of serverElements"
+[serverElement] = "serverElement">
+<p>
+	Server name : <strong>{{ serverElement.name }}</strong>
+</p>
+<p>
+	Server Content: {{ serverElement.content }}
+</p>
+
+</app-server-element>
