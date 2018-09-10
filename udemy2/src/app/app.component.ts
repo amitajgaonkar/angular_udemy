@@ -23,5 +23,8 @@ export class AppComponent {
 			content: bluePrintData.content,
 		});
 	}
+	Destroy() {
+		this.serverElements.splice(0,1);
+	}
 
 }

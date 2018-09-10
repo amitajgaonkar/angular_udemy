@@ -1,11 +1,11 @@
-<div *ngIf="element.type == 'server' else bluePrint">
+<div *ngIf="element1.type == 'server' else bluePrint">
 	<ng-content></ng-content>
 </div>
 <ng-template #bluePrint>
 	<p>
-			This is blue print of <strong>{{ element.name }}</strong>.
+			This is blue print of <strong>{{ element1.name }}</strong>.
 	</p>
 	<p>
-		Blueprint content of server <strong>{{ element.name }}</strong> is "{{ element.content }}"
+		Blueprint content of server <strong>{{ element1.name }}</strong> is "{{ element1.content }}"
 	</p>
 </ng-template>
