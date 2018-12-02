@@ -76,4 +76,14 @@
       </form>
     </div>
   </div>
+  <hr>
+  <div class="row" *ngIf="formSubmit">
+    <div class="col-md-12">
+      <p>User Name: {{user.username}}</p> 
+      <p>Email: {{user.email}}</p> 
+      <p>Question: {{user.question}}</p> 
+      <p>Answer: {{user.answer}}</p> 
+      <p>Gender: {{user.gender}}</p> 
+    </div>
+  </div>
 </div>
