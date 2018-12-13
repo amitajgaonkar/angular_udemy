@@ -1,29 +1,82 @@
 <div class="container">
   <div class="row">
     <div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
-      <form>
-        <div class="form-group">
-          <label for="username">Username</label>
-          <input
-            type="text"
-            id="username"
-            class="form-control">
-        </div>
-        <div class="form-group">
-          <label for="email">email</label>
-          <input
-            type="text"
-            id="email"
-            class="form-control">
+      <form [formGroup] = "regForm" (ngSubmit) = "onSubmit()">
+        <div [formGroupName] = "'userdata'">
+          <div class="form-group">
+            <label for="username">Username</label>
+            <input
+              type="text"
+              id="username"
+              class="form-control"
+              formControlName = "username">
+            <span 
+              class="form-error" 
+              *ngIf="!regForm.get('userdata.username').valid && regForm.get('userdata.username').touched">
+              <span 
+                class="form-error" 
+                *ngIf="regForm.get('userdata.username').errors.forbiddenName">
+                User Name is forbidden
+              </span>
+              <span 
+                class="form-error" 
+                *ngIf="regForm.get('userdata.username').errors['required']">
+                User Name is required
+              </span>
+            </span>
+          </div>
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input
+              type="text"
+              id="email"
+              class="form-control"
+              formControlName = "email">
+            <span 
+              class="form-error" 
+              *ngIf="!regForm.get('userdata.email').valid && regForm.get('userdata.email').touched">
+              <span 
+                class="form-error" 
+                *ngIf="regForm.get('userdata.email').errors['emailForbidden']">
+                Email is forbidden
+              </span>
+              <span 
+                class="form-error" 
+                *ngIf="regForm.get('userdata.email').errors['required']">
+                Email is required
+              </span>  
+            </span>
+          </div>
         </div>
         <div class="radio" *ngFor="let gender of genders">
           <label>
             <input
               type="radio"
-              [value]="gender">{{ gender }}
+              [value]="gender"
+              formControlName = "gender">{{ gender }}
           </label>
         </div>
+        <div formArrayName="hobbies">
+          <h4>Your Hobbies</h4>
+          <button 
+            class="btn btn-primary"
+            type="button"
+            (click)= "onAddHobby()">Add Hobby</button>
+          <div 
+            class="form-group" 
+            *ngFor="let hobby of regForm.get('hobbies').controls; let i = index">
+            <input class="form-control" type="text" [formControlName] = "i">
+          </div>
+        </div>
+        
         <button class="btn btn-primary" type="submit">Submit</button>
+
+        
+
+        <p 
+          class="form-error" 
+          *ngIf="!regForm.valid && regForm.touched">
+          Please check validation errors in the form.</p>
       </form>
     </div>
   </div>
