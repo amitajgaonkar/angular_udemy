@@ -14,6 +14,57 @@
 
           Upon submitting the form, simply print the value to the console
       -->
+      <form [formGroup]= "projectStatsForm" (ngSubmit) = "onSubmit()">
+        <div>
+          <div class="form-group">
+            <label for="pname">Project Name</label>
+            <input
+              type="text"
+              id="pname"
+              class="form-control"
+              formControlName="pname">
+            <span
+              *ngIf="!projectStatsForm.get('pname').valid && projectStatsForm.get('pname').touched">
+              <span class="form-error"
+                *ngIf="projectStatsForm.get('pname').errors.fobiddenProjectName">
+                Project name is forbidden.
+              </span>
+              <span class="form-error"
+                *ngIf="projectStatsForm.get('pname').errors.required">
+                Project name is required.
+              </span>
+            </span>
+          </div>
+          <div class="form-group">
+            <label for="pmemail">Mail</label>
+            <input
+              type="email"
+              id="pmemail"
+              class="form-control"
+              formControlName="pmMail">
+            <span
+              class="form-error"
+              *ngIf="!projectStatsForm.get('pmMail').valid && projectStatsForm.get('pmMail').touched">
+              Email is required.</span>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="pstatus">Project Status</label>
+          <select
+           id="pstatus" 
+           class="form-control"
+           formControlName="projectStatus">
+            <option 
+              *ngFor="let status of pStatuses" 
+              [value]="status">
+              {{ status }}</option>
+          </select>
+        </div>
+        <button
+          class="btn btn-primary"
+          [disabled] = "!projectStatsForm.valid"
+          type="submit">Submit</button>
+      </form>
     </div>
   </div>
 </div>
